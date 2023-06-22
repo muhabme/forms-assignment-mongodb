@@ -7,6 +7,11 @@ export const GET = async (request: NextRequest) => {
     // Get All Form Data
     try {
         const allForms = await Form.find();
+        allForms.sort(function (a, b): any {
+            const date1: number = new Date(b.date).getTime();
+            const date2: number = new Date(a.date).getTime();
+            return date1 - date2;
+        });
 
         return new NextResponse(JSON.stringify(allForms), {
             status: 200,
